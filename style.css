@@ -357,25 +357,99 @@ body {
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 550px) {
+
+/* Tablet */
+@media (max-width: 950px) {
+    :root {
+        --page-width: 380px;
+        --page-height: 472px;
+    }
+}
+
+/* Large phones / small tablets */
+@media (max-width: 800px) {
     :root {
         --page-width: 320px;
         --page-height: 398px;
     }
 
-    .month-label, .cover-label, .end-label {
-        font-size: 1.5rem;
+    .scrapbook-container {
+        perspective: 2000px;
     }
 }
 
-@media (max-width: 380px) {
+/* Mobile - show single page at a time */
+@media (max-width: 680px) {
     :root {
-        --page-width: 260px;
-        --page-height: 323px;
+        --page-width: min(85vw, 320px);
+        --page-height: min(105.6vw, 398px);
+    }
+
+    .scrapbook-container {
+        perspective: 1500px;
+        padding: 10px;
+    }
+
+    /* Don't shift the book on mobile - keep it centered */
+    .book.open {
+        transform: rotateX(3deg) translateX(0);
+    }
+
+    .book.closed-back {
+        transform: rotateX(3deg) translateX(0);
+    }
+
+    /* Adjust shadow for centered book */
+    .book.open .book-shadow,
+    .book.closed-back .book-shadow {
+        left: -10%;
+        width: 120%;
+    }
+
+    .swipe-hint {
+        font-size: 0.85rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+    :root {
+        --page-width: 90vw;
+        --page-height: 111.8vw;
+    }
+
+    .scrapbook-container {
+        perspective: 1200px;
+        gap: 15px;
     }
 
     .month-label, .cover-label, .end-label {
         font-size: 1.2rem;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 320px) {
+    :root {
+        --page-width: 95vw;
+        --page-height: 118vw;
+    }
+}
+
+/* Landscape mobile - prioritize fitting height */
+@media (max-height: 500px) and (orientation: landscape) {
+    :root {
+        --page-height: 75vh;
+        --page-width: calc(75vh * 0.804);
+    }
+
+    .scrapbook-container {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .swipe-hint {
+        display: none;
     }
 }
 
