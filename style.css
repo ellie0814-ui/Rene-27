@@ -184,7 +184,7 @@ body {
 
 /* ===== COVER PAGE ===== */
 .cover-page {
-    background-image: url('images/cover.png');
+    background-image: url('images/Front Page_rene.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -210,10 +210,10 @@ body {
 }
 
 /* ===== SPREAD BACKGROUNDS ===== */
-/* Title spread - using letter.png */
+/* Title spread - using letter_rene.png */
 [data-spread="title"] {
     background-color: #f5f5f5;
-    background-image: url('images/letter.png');
+    background-image: url('images/letter_rene.png');
 }
 
 /* All month spreads with actual images */
@@ -303,15 +303,15 @@ body {
     letter-spacing: 2px;
 }
 
-/* Page 14's back IS the back cover - using Back page.jpg */
+/* Page 2's back IS the back cover - using Back Page_rene.jpg */
 .back-cover-interior {
-    background-image: url('images/Back page.jpg');
+    background-image: url('images/Back Page_rene.jpg');
     background-size: cover;
     background-position: center;
 }
 
-/* Page 14 back should look like a book cover, not a page */
-.page[data-page="14"] .page-back {
+/* Page 2 back should look like a book cover, not a page */
+.page[data-page="2"] .page-back {
     border-radius: 0 8px 8px 0;
     box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
 }

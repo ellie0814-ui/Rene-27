@@ -1,10 +1,8 @@
 // ===== SCRAPBOOK PAGE FLIP ENGINE =====
 //
 // Page structure (how spreads map to DOM pages):
-// - Page 1: Front=Cover, Back=Title-Left
-// - Page 2: Front=Title-Right, Back=January-Left
-// - Page 3: Front=January-Right, Back=February-Left
-// - ... and so on
+// - Page 1: Front=Cover, Back=Letter-Left
+// - Page 2: Front=Letter-Right, Back=Back Cover Interior
 //
 // When viewing a spread:
 // - LEFT side shows: flipped page's BACK
@@ -12,13 +10,12 @@
 //
 // currentSpread values:
 // 0 = Cover (closed book, seeing page 1 front)
-// 1 = Title spread (page 1 back + page 2 front)
-// 2 = January spread (page 2 back + page 3 front)
-// ... etc
+// 1 = Letter spread (page 1 back + page 2 front)
+// 2 = Back cover (all pages flipped)
 
 // ===== STATE =====
 let currentSpread = 0;  // 0 = cover showing
-const totalPages = 14;
+const totalPages = 2;
 let isAnimating = false;
 
 // Drag state
@@ -305,7 +302,7 @@ function updateBookState() {
         book.classList.remove('closed-back');
     } else if (currentSpread >= totalPages) {
         // Back cover - close immediately
-        // Page 14 flips naturally, its back IS the back cover
+        // Page 2 flips naturally, its back IS the back cover
         book.classList.remove('open');
         book.classList.add('closed-back');
     } else {
