@@ -1,0 +1,387 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+    --bg-color: #f5f2ed;
+    --page-color: #f5f5f5;
+    --page-width: 453px;
+    --page-height: 563px;
+}
+
+/* ===== BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #f5f2ed;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ===== SCRAPBOOK CONTAINER ===== */
+.scrapbook-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh;
+    perspective: 2500px;
+}
+
+/* ===== BOOK WRAPPER ===== */
+.book {
+    position: relative;
+    width: var(--page-width);
+    height: var(--page-height);
+    transform-style: preserve-3d;
+    cursor: grab;
+    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    /* Slight 3D tilt for depth */
+    transform: rotateX(3deg);
+}
+
+.book.open {
+    /* When open, shift right so the spread is centered */
+    transform: rotateX(3deg) translateX(50%);
+}
+
+.book.closed-back {
+    /* Back cover - shift right by full page width to center the flipped page */
+    /* Flipped pages are on the LEFT of spine, so we shift right to center */
+    transform: rotateX(3deg) translateX(100%);
+}
+
+/* When closed from back, page 14's back (the back cover) should be visible */
+/* All pages stay visible - page 14 is flipped showing its back (back cover) */
+
+.book:active {
+    cursor: grabbing;
+}
+
+/* Book shadow for grounding - no transition */
+.book-shadow {
+    position: absolute;
+    bottom: -20px;
+    left: -10%;
+    width: 120%;
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: -10;
+    transition: none !important;
+}
+
+.book.open .book-shadow {
+    left: -60%;
+    width: 220%;
+}
+
+.book.closed-back .book-shadow {
+    /* Shadow follows the shifted book position */
+    left: -110%;
+    width: 120%;
+}
+
+/* ===== PAGE STYLES ===== */
+.page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    cursor: pointer;
+}
+
+.page.dragging {
+    transition: none !important;
+}
+
+.page.flipping {
+    z-index: 1000 !important;
+}
+
+.page-front,
+.page-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 0 8px 8px 0;
+    overflow: hidden;
+    background: var(--page-color);
+    /* No transitions on page faces - only the .page wrapper animates */
+    transition: none !important;
+}
+
+.page-front {
+    z-index: 2;
+    /* Minimal page edge effect */
+    box-shadow:
+        2px 0 0 #f0ede8,
+        3px 2px 8px rgba(0,0,0,0.15);
+}
+
+.page-back {
+    z-index: 1;
+    transform: rotateY(180deg);
+    /* Rounded corners for left page */
+    border-radius: 8px 0 0 8px;
+    box-shadow:
+        -2px 0 0 #f0ede8,
+        -3px 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Flipped state */
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+/* ===== PAGE CONTENT ===== */
+.page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    transition: none !important;
+}
+
+/* REMOVED: Spine shadows on individual pages were causing delayed darkening
+   when z-index changed after flip animation completed. The single spine line
+   on .book::before is sufficient. */
+
+/* ===== SPREAD POSITIONING ===== */
+.spread-left {
+    background-position: left center;
+}
+
+.spread-right {
+    background-position: right center;
+}
+
+/* ===== COVER PAGE ===== */
+.cover-page {
+    background-image: url('images/cover.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.cover-page .cover-label,
+.cover-page .cover-year {
+    display: none;
+}
+
+.cover-label {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f5f5f5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 4px;
+}
+
+.cover-year {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 8px;
+    margin-top: 10px;
+}
+
+/* ===== SPREAD BACKGROUNDS ===== */
+/* Title spread - using letter.png */
+[data-spread="title"] {
+    background-color: #f5f5f5;
+    background-image: url('images/letter.png');
+}
+
+/* All month spreads with actual images */
+[data-spread="january"] {
+    background-color: #f5f5f5;
+    background-image: url('images/january.png');
+}
+
+[data-spread="february"] {
+    background-color: #f5f5f5;
+    background-image: url('images/Feb.png');
+}
+
+[data-spread="march"] {
+    background-color: #f5f5f5;
+    background-image: url('images/March.png');
+}
+
+[data-spread="april"] {
+    background-color: #f5f5f5;
+    background-image: url('images/April.png');
+}
+
+[data-spread="may"] {
+    background-color: #f5f5f5;
+    background-image: url('images/May.png');
+}
+
+[data-spread="june"] {
+    background-color: #f5f5f5;
+    background-image: url('images/June.png');
+}
+
+[data-spread="july"] {
+    background-color: #f5f5f5;
+    background-image: url('images/July.png');
+}
+
+[data-spread="august"] {
+    background-color: #f5f5f5;
+    background-image: url('images/August.png');
+}
+
+[data-spread="september"] {
+    background-color: #f5f5f5;
+    background-image: url('images/September.png');
+}
+
+[data-spread="october"] {
+    background-color: #f5f5f5;
+    background-image: url('images/October.png');
+}
+
+[data-spread="november"] {
+    background-color: #f5f5f5;
+    background-image: url('images/Nov.png');
+}
+
+[data-spread="december"] {
+    background-color: #f5f5f5;
+    background-image: url('images/Dec.png');
+}
+
+/* Hide labels for all spreads with images */
+[data-spread="title"] .month-label,
+[data-spread="january"] .month-label,
+[data-spread="february"] .month-label,
+[data-spread="march"] .month-label,
+[data-spread="april"] .month-label,
+[data-spread="may"] .month-label,
+[data-spread="june"] .month-label,
+[data-spread="july"] .month-label,
+[data-spread="august"] .month-label,
+[data-spread="september"] .month-label,
+[data-spread="october"] .month-label,
+[data-spread="november"] .month-label,
+[data-spread="december"] .month-label {
+    display: none;
+}
+
+/* Month label styling */
+.month-label {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Page 14's back IS the back cover - using Back page.jpg */
+.back-cover-interior {
+    background-image: url('images/Back page.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Page 14 back should look like a book cover, not a page */
+.page[data-page="14"] .page-back {
+    border-radius: 0 8px 8px 0;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== BOOK SPINE ===== */
+/* Very subtle spine - just a thin line to suggest binding */
+/* No transitions - must be instant */
+.book::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(90deg,
+        rgba(90, 74, 58, 0.4) 0%,
+        rgba(139, 105, 20, 0.5) 50%,
+        rgba(90, 74, 58, 0.4) 100%
+    );
+    border-radius: 2px 0 0 2px;
+    box-shadow: -1px 0 2px rgba(0,0,0,0.15);
+    z-index: 1000;
+    transition: none !important;
+}
+
+/* ===== BOOK BACK COVER ===== */
+/* Hidden - all pages have their own backgrounds, no need for this fallback */
+.book::after {
+    display: none;
+}
+
+/* ===== SWIPE HINT ===== */
+.swipe-hint {
+    color: rgba(80, 70, 60, 0.8);
+    font-size: 0.95rem;
+    text-align: center;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.swipe-hint.hidden {
+    opacity: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 550px) {
+    :root {
+        --page-width: 320px;
+        --page-height: 398px;
+    }
+
+    .month-label, .cover-label, .end-label {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 380px) {
+    :root {
+        --page-width: 260px;
+        --page-height: 323px;
+    }
+
+    .month-label, .cover-label, .end-label {
+        font-size: 1.2rem;
+    }
+}
+
+/* Prevent selection */
+.book * {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}

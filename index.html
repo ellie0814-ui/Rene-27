@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Scrapbook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scrapbook-container">
+        <!-- Book wrapper for 3D perspective -->
+        <div class="book">
+            <!-- Shadow beneath book for grounding -->
+            <div class="book-shadow"></div>
+
+            <!-- Page 1: Cover / Title-Left -->
+            <div class="page" data-page="1">
+                <div class="page-front">
+                    <div class="page-content cover-page">
+                        <span class="cover-label">My Scrapbook</span>
+                        <span class="cover-year">2024</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="title">
+                        <span class="month-label">Title Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2: Title-Right / February-Left -->
+            <div class="page" data-page="2">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="title">
+                        <span class="month-label">Title Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="february">
+                        <span class="month-label">Feb Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 3: February-Right / March-Left -->
+            <div class="page" data-page="3">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="february">
+                        <span class="month-label">Feb Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="march">
+                        <span class="month-label">Mar Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 4: March-Right / April-Left -->
+            <div class="page" data-page="4">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="march">
+                        <span class="month-label">Mar Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="april">
+                        <span class="month-label">Apr Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 5: April-Right / May-Left -->
+            <div class="page" data-page="5">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="april">
+                        <span class="month-label">Apr Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="may">
+                        <span class="month-label">May Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 6: May-Right / June-Left -->
+            <div class="page" data-page="6">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="may">
+                        <span class="month-label">May Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="june">
+                        <span class="month-label">Jun Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 7: June-Right / July-Left -->
+            <div class="page" data-page="7">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="june">
+                        <span class="month-label">Jun Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="july">
+                        <span class="month-label">Jul Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 8: July-Right / August-Left -->
+            <div class="page" data-page="8">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="july">
+                        <span class="month-label">Jul Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="august">
+                        <span class="month-label">Aug Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 9: August-Right / September-Left -->
+            <div class="page" data-page="9">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="august">
+                        <span class="month-label">Aug Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="september">
+                        <span class="month-label">Sep Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 10: September-Right / October-Left -->
+            <div class="page" data-page="10">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="september">
+                        <span class="month-label">Sep Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="october">
+                        <span class="month-label">Oct Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 11: October-Right / November-Left -->
+            <div class="page" data-page="11">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="october">
+                        <span class="month-label">Oct Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="november">
+                        <span class="month-label">Nov Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 12: November-Right / December-Left -->
+            <div class="page" data-page="12">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="november">
+                        <span class="month-label">Nov Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="december">
+                        <span class="month-label">Dec Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 13: December-Right / January-Left -->
+            <div class="page" data-page="13">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="december">
+                        <span class="month-label">Dec Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content spread-left" data-spread="january">
+                        <span class="month-label">Jan Left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 14: January-Right / Back Cover Interior -->
+            <div class="page" data-page="14">
+                <div class="page-front">
+                    <div class="page-content spread-right" data-spread="january">
+                        <span class="month-label">Jan Right</span>
+                    </div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content back-cover-interior"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swipe hint -->
+        <div class="swipe-hint">
+            <span>Swipe or drag to turn pages</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
